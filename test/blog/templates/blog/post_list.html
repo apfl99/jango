@@ -12,7 +12,7 @@
         <a href="/">HOME</a>
     </nav>
     <h2>Post List</h2>
-    {% for p in posts %}
+    {% for p in post_list %}
         <hr/>
         <h3><a href="{{p.get_absolute_url}}/">{{p.title}}</a></h3>
         <p>{{p.created_at}}</p>
