@@ -2,6 +2,7 @@
 # PyCharm
 .idea\
 migrations/
+_media/
 
 #Django stuff
 *.log

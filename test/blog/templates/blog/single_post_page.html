@@ -13,7 +13,27 @@
         <a href="/blog">Blog List</a>
     </nav>
     <h2>{{post.title}}</h2>
+    {% if post.head_image %}
+    <img src="{{post.head_image.url}}" height="300" title="{{post}} head image"/>
+    {% else %}
+    <img src="https://picsum.photos/seed/{{ post.pk }}/800/200" title="random image"/>
+    {% endif %}
+
     <p>{{post.created_at}}</p>
+
+    {% if post.hook_text %}
+    <p>{{post.hook_text}}</p>
+    {% endif %}
+
+    <!-- file Download -->
+    {% if post.file_upload %}
+    <a href="{{post.file_upload.url}}" download><button>file Download</button></a>
+    {% else %}
+    <div> 정보없음 </div>
+    {% endif %}
+
+
+
     <p>{{post.content}}</p>
     <hr/>
     <p>댓글 추가 위치</p>
