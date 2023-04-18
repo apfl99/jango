@@ -1,12 +1,2 @@
 # created by virtualenv automatically
-# PyCharm
-.idea\
-migrations/
-_media/
-
-#Django stuff
-*.log
-db.sqlite3
-db.sqlite3-journal
-
-
+*

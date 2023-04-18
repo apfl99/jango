@@ -25,4 +25,5 @@ urlpatterns = [
     path("blog/", include('blog.urls')),
 ]
 
+# 정적 파일 관리: 이미지 경로
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
