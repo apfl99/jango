@@ -2,11 +2,11 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    # class방식
-    path('',views.PostList.as_view()),
-    path('<int:pk>/',views.PostDetail.as_view()),
+    # CBV
+    path('',views.PostList.as_view()), # 해당 앱의 PostList Class로 연결
+    path('<int:pk>/',views.PostDetail.as_view()), # 해당 앱의 PostDetail Class로 연결, url의 숫자(e.g, blog/1) pk로 인식
 
-    # 함수 방식
-    # path('', views.index),
-    # path('<int:pk>/',views.single_post_page),
+    # FBV
+    # path('', views.index), # 해당 앱의 index 함수로 연결
+    # path('<int:pk>/',views.single_post_page), # 해당 앱의 single_post_page 함수로 연결, url의 숫자(e.g, blog/1) pk로 인식
 ]

@@ -37,8 +37,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "blog",
-    "single_pages"
+    # python manage.py startapp [app명] 이후 app 등록
+    "blog", # blog app 등록
+    "single_pages" # single_pages app 등록
 ]
 
 MIDDLEWARE = [
@@ -101,23 +102,24 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "Asia/Seoul"
+TIME_ZONE = "Asia/Seoul" # 타임존 설정
 
 USE_I18N = True
 
-USE_TZ = False
+USE_TZ = False # 타임존 설정
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
-# 정적 파일 관리
 
+# 정적, 미디어 파일 관리
 import os
 
-STATIC_URL = "static/"
+STATIC_URL = "static/" # 정적 파일 경로: 사용할 앱 안에 static/앱 이름/ ~
 
-MEDIA_URL = '/media/'  # url path
-MEDIA_ROOT = os.path.join(BASE_DIR, '_media') # server local dir
+# 업로드한 파일이 저장될 폴더 지정 => urls.py에서 url 설정
+MEDIA_URL = '/media/'  # url path: /media/라는 경로가 따라오면 미디어 파일 사용
+MEDIA_ROOT = os.path.join(BASE_DIR, '_media') # 서버의 미디어 저장 경로 설정
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
