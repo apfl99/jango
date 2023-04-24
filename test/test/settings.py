@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # python manage.py startapp [app명] 이후 app 등록
     "blog", # blog app 등록
-    "single_pages" # single_pages app 등록
+    "single_pages", # single_pages app 등록
+    "midterm"
 ]
 
 MIDDLEWARE = [
@@ -115,7 +116,7 @@ USE_TZ = False # 타임존 설정
 # 정적, 미디어 파일 관리
 import os
 
-STATIC_URL = "static/" # 정적 파일 경로: 사용할 앱 안에 static/앱 이름/ ~
+STATIC_URL = "static/" # 정적 파일 경로: 사용할 앱 안에 static/앱 이름/ ~ e.g, static/blog/~
 
 # 업로드한 파일이 저장될 폴더 지정 => urls.py에서 url 설정
 MEDIA_URL = '/media/'  # url path: /media/라는 경로가 따라오면 미디어 파일 사용
