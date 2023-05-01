@@ -1,24 +1,7 @@
-<!doctype html>
-{% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+{% extends 'midterm/base.html' %}
 
-    <link rel="stylesheet" href="{% static 'midterm/css/midterm.min.css' %}"  media="screen">
+    {% block main_area %}
 
-    <title>Document</title>
-</head>
-<body>
-        <div class="container my-3">
-            <div class="row">
-                <div class="col-md-4 col-lg-3">
-                    <a class="btn btn-outline-primary btn-block" href="/midterm" role="button">Midterm Home</a>
-                    <a class="btn btn-outline-info btn-block" href="/midterm/list" role="button">Staff List</a>
-                </div>
-                <div class="col-md-8 col-lg-9">
                     <div class="card mb-4">
                         <img class="card-img-top" src="https://loremflickr.com/800/200" title="random image"/>
 
@@ -32,8 +15,6 @@
                             </p>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-</body>
-</html>
+
+
+    {% endblock %}
