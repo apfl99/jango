@@ -10,13 +10,17 @@ from .models import Post #모델 사용
 class PostList(ListView): # 모델명_list.html
     model = Post # post_list 변수
     ordering = '-pk' # pk 역순으로 나열
-    template_name = 'blog/blog_list.html' # 템플릿 지정: 기본 템플릿 post_list.html이 아닌 blog_list.html 사용
+    # template_name = 'blog/blog_list.html' # 템플릿 지정: 기본 템플릿 post_list.html이 아닌 blog_list.html 사용
     # html에서 post_list로 모델값 불러옴
+
+    # 추가 context: Category
 
 class PostDetail(DetailView): # 모델명_detail.html
     model = Post # post_list 변수
-    template_name = 'blog/single_post_page.html'  # 템플릿 지정: 기본 템플릿 post_detail.html이 아닌 single_post_page.html 사용
+    # template_name = 'blog/single_post_page.html'  # 템플릿 지정: 기본 템플릿 post_detail.html이 아닌 single_post_page.html 사용
     # html에서 post로 모델값 불러옴
+
+    # 추가 context: Category
 
 # FBV
 # def index(request):
