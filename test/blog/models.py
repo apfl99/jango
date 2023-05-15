@@ -4,6 +4,14 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
+class Tag(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    slug = models.SlugField(max_length=200, unique=True, allow_unicode=True) # unicode => 한글 허용
+
+    def __str__(self):
+        return self.name
+
+
 class Category(models.Model):
     name = models.CharField(max_length=50, unique=True)
     slug = models.SlugField(max_length=200, unique=True, allow_unicode=True) # unicode => 한글 허용
@@ -32,8 +40,11 @@ class Post(models.Model):
     author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL) #user를 지웠을때, 사용자가 작성한 Post의 author를 NULL로 설정 => none으로 표시
     #on_delete=models.CASCADE #user를 지웠을때, User에 연결되어있는 모든 Post을 지움
 
-    #category
+    #category: One To Many
     category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)
+
+    #tag: Many To Many
+    tags = models.ManyToManyField(Tag, blank=True)
 
     def __str__(self):
         return f'[{self.pk}]{self.title} :: {self.author}'
