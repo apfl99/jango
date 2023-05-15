@@ -5,7 +5,7 @@ from .models import Post, Category #모델 사용
 
 # Create your views here.
 
-class PostCreate(CreateView): # Form 모델명_form.html
+class PostCreate(LoginRequiredMixin,UserPassesTestMixin,CreateView): # Form 모델명_form.html
     model = Post # post_list 변수
     fields = ['title', 'hook_text', 'content', 'head_image', 'file_upload', 'category', 'tags']
 
