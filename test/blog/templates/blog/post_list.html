@@ -11,7 +11,7 @@
             {% if post_list.exists %}
                 {% for p in post_list %}
                 <!-- Blog post-->
-                <div class="card mb-4">
+                <div class="card mb-4" id="post-{{p.pk}}">
                     {% if p.head_image %}
                         <img class="card-img-top" src="{{ p.head_image.url }}" height=300 alt="{{ p }} head image" />
                     {% else %}
@@ -49,7 +49,7 @@
                 </div>
                 {% endfor %}
             {% else %}
-                <h3>아직 게시물이 없습니다.</h3>
+                <h3>아직 게시물이 없습니다.</h3>직
             {% endif %}
                 <!-- Pagination-->
                 <nav aria-label="Pagination">
