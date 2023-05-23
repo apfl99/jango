@@ -7,7 +7,8 @@ urlpatterns = [
     path('<int:pk>/',views.PostDetail.as_view()), # 해당 앱의 PostDetail Class로 연결, url의 숫자(e.g, blog/1) pk로 인식
     path('category/<str:slug>/',views.category_page), #FBV
     path('create_post/', views.PostCreate.as_view()), # /blog/create_post/
-    # path('update_post/<int:pk>/', views.PostUpdate.as_view()),
+    path('update_post/<int:pk>/', views.PostUpdate.as_view()), # /blog/update_post/5
+
 
 
     # FBV

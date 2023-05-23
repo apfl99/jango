@@ -26,6 +26,7 @@ urlpatterns = [
     path("", include('single_pages.urls')), # single_pages app의 urls.py로 연결
     path("blog/", include('blog.urls')), # blog app의 urls.py로 연결
     path("midterm/", include('midterm.urls')),
+    path('accounts/',include('allauth.urls')),
 ]
 
 # 미디어 파일 관리: setting.py의 MEDIA_URL과 MEDIA_ROOT를 활용한 url 설정
