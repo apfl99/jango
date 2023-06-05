@@ -8,6 +8,7 @@ urlpatterns = [
     path('category/<str:slug>/',views.category_page), #FBV
     path('create_post/', views.PostCreate.as_view()), # /blog/create_post/
     path('update_post/<int:pk>/', views.PostUpdate.as_view()), # /blog/update_post/5
+    path('<int:pk>/new_comment/', views.new_comment),
 
 
 

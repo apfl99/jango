@@ -1,8 +1,9 @@
 from django.contrib import admin
-from .models import Post, Category, Tag
+from .models import Post, Category, Tag, Comment
 
 # Register your models here.
 admin.site.register(Post) # 만든 모델 등록
+admin.site.register(Comment) # 만든 모델 등록
 
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name', )} # name 필드값으로 slug를 자동생성하도록 설정

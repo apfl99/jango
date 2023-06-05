@@ -2,11 +2,31 @@ from django.shortcuts import render, redirect # FBV
 from django.views.generic import ListView, DetailView, CreateView, UpdateView # CBV
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Post, Category #모델 사용
+from .forms import CommentForm
 from django.core.exceptions import PermissionDenied
-
+from django.shortcuts import get_object_or_404
 
 
 # Create your views here.
+def new_comment(request, pk):
+    if request.user.is_authenticated:
+        post = get_object_or_404(Post, pk=pk)
+
+        if request.method == 'POST':
+            comment_form = CommentForm(request.POST)
+            if comment_form.is_valid():
+                comment = comment_form.save(commit=False)
+                comment.post = post
+                comment.author = request.user
+                comment.save()
+                return redirect(comment.get_absolute_url())
+        else:
+            return redirect(post.get_absolute_url())
+
+    else:
+        raise PermissionDenied
+
+
 def csrf_failure(request, reason=""):
     return redirect('/blog/')
 
@@ -64,7 +84,8 @@ class PostDetail(DetailView): # 모델명_detail.html
         context = super(PostDetail, self).get_context_data()
         context['categories'] = Category.objects.all() # 카테고리 테이블 전체를 categories 변수로 넘김
         context['no_category_post_count'] = Post.objects.filter(category=None).count() # 카테고리가 없는 Post 개수를  no_cate~ 변수로 넘김
-        return context # post_detail.html로 {post, categories, no_category_post_count}
+        context['comment_form'] = CommentForm
+        return context # post_detail.html로 {post, categories, no_category_post_count, comment_form}
 
     # template_name = 'blog/single_post_page.html'  # 템플릿 지정: 기본 템플릿 post_detail.html이 아닌 single_post_page.html 사용
     # html에서 post로 모델값 불러옴

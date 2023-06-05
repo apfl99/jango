@@ -26,10 +26,10 @@ urlpatterns = [
     path("", include('single_pages.urls')), # single_pages app의 urls.py로 연결
     path("blog/", include('blog.urls')), # blog app의 urls.py로 연결
     path("midterm/", include('midterm.urls')),
-    path('accounts/',include('allauth.urls')),
+    path('accounts/', include('allauth.urls')),
 ]
 
 # 미디어 파일 관리: setting.py의 MEDIA_URL과 MEDIA_ROOT를 활용한 url 설정
 # /media로 브라우저가 실행되면, 서버의 _media로 url 설정
-# e.g, http://localhost:8000/media/blog/images/2023/04/17/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2023-04-17_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_5.32.02.png
+# e.g., http://localhost:8000/media/blog/images/2023/04/17/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2023-04-17_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_5.32.02.png
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
