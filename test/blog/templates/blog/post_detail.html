@@ -91,7 +91,7 @@
                                         <button type="submit" class="btn btn-primary float-right">Submit</button>
                                     </form>
                                 {% else %}
-                                    <a role="button" class="btn btn-outline-dark btn-block btn-sm" href="#" data-toggle="modal" data-target="#LoginModal">Log In and leave a comment</a>
+                                    <a role="button" class="btn btn-outline-dark btn-block btn-sm" data-toggle="modal" data-target="#loginModal">Log In and leave a comment</a>
                                 {% endif %}
 
                             </div>
@@ -105,8 +105,24 @@
                                         <div class="flex-shrink-0">
                                             <img class="rounded-circle" src="http://dummyimage.com/50x50/ced4da/6c757d.jpg&text={{comment.author.username}}" alt="..." />
                                         </div>
-                                        <div class="media-body">
-                                            <div class="fw-bold">{{comment.author.username}} &nbsp;&nbsp; <small class="text-muted">{{comment.created_at}}</small></div>
+                                        <div class="ms-3">
+                                            {% if user.is_authenticated and comment.author == user %}
+                                            <div class="float-right">
+                                                <a role="button" class="btn btn-sm btn-info"
+                                                   id="comment-{{comment.pk}}-update-btn"
+                                                   href="/blog/update_comment/{{comment.pk}}/">
+                                                   <small>edit</small>
+                                                </a>
+                                                <a role="button" class="btn btn-sm btn-danger"
+                                                   id="comment-{{comment.pk}}-delete-modal-btn"
+                                                   href="/blog/delete_comment/{{comment.pk}}/">
+                                                   <small>delete</small>
+                                                </a>
+                                            </div>
+                                            {% endif %}
+                                            <div class="fw-bold">{{comment.author.username}} &nbsp;&nbsp;
+                                                <small class="text-muted">{{comment.created_at}}</small>
+                                            </div>
                                             <div>{{comment.content | linebreaks}}</div>
                                             {% if comment.created_at != comment.modified_at %}
                                                 <div class="text-muted float-right"><small>Updated: {{comment.modified_at}}</small></div>

@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect # FBV
 from django.views.generic import ListView, DetailView, CreateView, UpdateView # CBV
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .models import Post, Category #모델 사용
+from .models import Post, Category, Comment #모델 사용
 from .forms import CommentForm
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404
-
+from django.db.models import Q
 
 # Create your views here.
 def new_comment(request, pk):
@@ -25,6 +25,28 @@ def new_comment(request, pk):
 
     else:
         raise PermissionDenied
+
+
+def delete_comment(request,pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    post = comment.post
+    if request.user.is_authenticated and request.user == comment.author:
+        comment.delete()
+        return redirect(post.get_absolute_url())
+    else:
+        raise PermissionDenied
+
+class CommentUpdate(LoginRequiredMixin, UpdateView):
+    model = Comment
+    form_class = CommentForm
+
+    # template_name = comment_form.html
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user == self.get_object().author:
+            return super(CommentUpdate, self).dispatch(request, *args, **kwargs)
+        else:
+            raise PermissionDenied
 
 
 def csrf_failure(request, reason=""):
@@ -64,6 +86,7 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView): # Form �
 class PostList(ListView): # 모델명_list.html
     model = Post # post_list 변수
     ordering = '-pk' # pk 역순으로 나열
+    paginate_by = 2
 
     def get_context_data(self, **kwargs):
         context = super(PostList, self).get_context_data()
@@ -89,6 +112,23 @@ class PostDetail(DetailView): # 모델명_detail.html
 
     # template_name = 'blog/single_post_page.html'  # 템플릿 지정: 기본 템플릿 post_detail.html이 아닌 single_post_page.html 사용
     # html에서 post로 모델값 불러옴
+
+class PostSearch(PostList):
+    paginate_by = None
+
+    def get_queryset(self):
+        q = self.kwargs['q']
+        post_list = Post.objects.filter(
+            Q(title__contains=q) | Q(tags__name__contains=q)
+        ).distinct() # 중복 제거
+        return post_list
+
+    def get_context_data(self, **kwargs): # 위에 따로 띄워주기 위한 Text 만들기
+        context = super(PostSearch, self).get_context_data()
+        q = self.kwargs['q']
+        context['search_info'] = f'Search: {q} ({self.get_queryset().count()})'
+
+        return context
 
 
 
