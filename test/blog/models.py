@@ -15,7 +15,7 @@ class Tag(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=50, unique=True)
-    slug = models.SlugField(max_length=200, unique=True, allow_unicode=True) # unicode => 한글 허용
+    slug = models.SlugField(max_length=200, unique=True, allow_unicode=True) # unicode => 한글 허용: url 생성을 위해 사용함
 
     def __str__(self):
         return self.name
@@ -23,8 +23,9 @@ class Category(models.Model):
     def get_absolute_url(self):
         return f'/blog/category/{self.slug}/'
 
+    # DB 테이블 명 지정, 원래 Categorys로 설정되어 있음
     class Meta:
-        verbose_name_plural = "Categories" # DB 테이블 명 지정, 원래 Categorys로 설정되어 있음
+        verbose_name_plural = "Categories"
 
 class Post(models.Model):
     title = models.CharField(max_length=30)
@@ -50,6 +51,7 @@ class Post(models.Model):
     def __str__(self):
         return f'[{self.pk}]{self.title} :: {self.author}'
 
+    # post 별 url 링크 설정
     def get_absolute_url(self):
         return f'/blog/{self.pk}/'
 
@@ -67,6 +69,7 @@ class Comment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 
+    # post foreign key 설정
     def __str__(self):
         return f'{self.author}::{self.content}'
 

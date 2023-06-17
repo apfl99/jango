@@ -1,5 +1,8 @@
 <!doctype html>
+
+<!--정적 파일 로드 css-->
 {% load static %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>나의 블로그 홈페이지</title>
 
-    <!--정적 파일 관리: css 파일 적용-->
+    <!--정적 파일 관리: css 파일 적용: {% load static %} import해야 함-->
     <link rel="stylesheet" href="{% static 'blog/bootstrap4/bootstrap.min.css' %}"  media="screen">
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -18,18 +21,23 @@
     <script src="https://kit.fontawesome.com/89a12d4a7e.js" crossorigin="anonymous"></script>
 </head>
 <body style="background-color: gray;">
+
+    <!--blog app의 navbar.html을 쓰겠다.-->
     {% include 'blog/navbar.html' %}
 
     <div class="container">
         <div class="row justify-content-between">
+
             <div class="col-lg-5 mt-3">
                 <h2>Landing Pages</h2>
                 <hr/>
                 <p>Welcome!</p>
                 <p>환영합니다!</p>
             </div>
+
             <div class="col-lg-5 mt-3">
                 <h2>Blog - Recent Posts</h2>
+                <!--recent_posts 변수 사용 for 문-->
                 {% for p in recent_posts %}
                     <div class="card mt-1" style="background-color:rgba(255,255,255,0.6)">
                         <div class="card-body">
@@ -45,12 +53,13 @@
                     </div>
                 {% endfor %}
             </div>
-        </div>
 
+        </div>
     </div>
 
     <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
+    <!--blog app의 footer.html을 쓰겠다.-->
     {% include 'blog/footer.html' %}
 </body>
 </html>

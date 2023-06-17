@@ -19,14 +19,19 @@
 
 </head>
 <body>
+    <!--해당 부분에 blog/navbar.html 포함-->
     {% include 'blog/navbar.html' %}
 
     <div class="container my-3">
         <div class="row">
             <div class="col-md-8 col-lg-9" id="main-area">
+
+                <!--main_content 선언-->
                 {% block main_content %}
                 {% endblock %}
+
             </div>
+
             <div class="col-md-4 col-lg-3">
 
                 <!-- Search widget-->

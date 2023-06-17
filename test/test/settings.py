@@ -37,19 +37,22 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
     # python manage.py startapp [app명] 이후 app 등록
     "blog", # blog app 등록
     "single_pages", # single_pages app 등록
-    "midterm",
+    "midterm", # 중간 app 등록
 
+    # 탬플릿과 필터 함수 등을 제공
     "crispy_forms",
     "crispy_bootstrap4",
 
+    # 사용자 계정, OAuth 관련 라이브러리 제공
     'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    # 'allauth.socialaccount.providers.google',
+    # 'allauth.socialaccount.providers.google', # google
 ]
 
 MIDDLEWARE = [
@@ -63,6 +66,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "test.urls"
+
 
 TEMPLATES = [
     {
@@ -139,11 +143,13 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+# allauth BackEnd Setting
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
+# allauth 환경 변수 설정
 SITE_ID = 1
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'none'

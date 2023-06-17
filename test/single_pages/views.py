@@ -3,6 +3,7 @@ from blog.models import Post
 # Create your views here.
 
 def landing(request):
+    # 최근 포스트 3개 recent_posts에 저장
     recent_posts = Post.objects.order_by('-pk')[:3]
     return render(
         request,

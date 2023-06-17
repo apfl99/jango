@@ -1,4 +1,5 @@
 
+            <!--blog/base.html을 확장시켜서 사용하겠다.-->
             {% extends 'blog/base.html' %}
 
             {% block main_content %}
@@ -13,11 +14,16 @@
 
                 <h1>
                     Blog
-                    {% if search_info %} <small class="text-muted">{{search_info}}</small> {% endif %}
-                    {% if category %}<span class="badge badge-secondary">{{category}}</span>
+                    {% if search_info %}
+                        <small class="text-muted">{{search_info}}</small>
+                    {% endif %}
+                    {% if category %}
+                        <span class="badge badge-secondary">{{category}}</span>
                     {% endif %}
                 </h1>
+
             {% if post_list.exists %}
+
                 {% for p in post_list %}
                 <!-- Blog post-->
                 <div class="card mb-4" id="post-{{p.pk}}">
@@ -57,13 +63,15 @@
                     </div>
                 </div>
                 {% endfor %}
+
             {% else %}
-                <h3>아직 게시물이 없습니다.</h3>직
+                <h3>아직 게시물이 없습니다.</h3>
             {% endif %}
 
+            <!--페이지네이션-->
             {% if is_paginated %}
 
-                <!-- paginator, page_obj -->
+                <!-- paginator, page_obj: 페이지네이션 ListView의 라이브러리 -->
                 <!-- page_obj.number / page_obj.previous_page_number | page_obj.next_page_number -->
                 <!-- paginator.page_range -->
 
@@ -72,6 +80,7 @@
                     <hr class="my-0" />
                     <ul class="pagination justify-content-center my-4">
 
+                        <!-- 이전 페이지 여부 -->
                         {% if page_obj.has_previous %}
                             <li class="page-item">
                                 <a class="page-link" href="?page={{page_obj.previous_page_number}}">&larr; Newer</a>
@@ -83,6 +92,7 @@
                         {% endif %}
 
                         <!--Page Number-->
+                        <!-- ?page={{페이지번호}}로 페이지 쿼리 이동 가능 -->
                         {% for i in paginator.page_range %}
                             {% if i == page_obj.number %}
                                 <li class="page-item disabled">
@@ -95,6 +105,7 @@
                             {% endif %}
                         {% endfor %}
 
+                        <!-- 다음 페이지 여부 -->
                         {% if page_obj.has_next %}
                             <li class="page-item">
                                 <a class="page-link" href="?page={{page_obj.next_page_number}}">Older &rarr;</a>

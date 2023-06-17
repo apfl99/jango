@@ -1,10 +1,14 @@
 
+    <!--blog/base_full_width.html을 확장해서 사용-->
     {% extends 'blog/base_full_width.html' %}
 
+    <!--form 탬플릿 사용을 위한 load-->
     {% load crispy_forms_tags %}
 
+    <!--blog/base_full_width.html의 head_title 오버라이딩 느낌-->
     {% block head_title %}Edit Post - Blog{% endblock %}
 
+    <!--blog/base_full_width.html의 main_content 오버라이딩 느낌-->
     {% block main_content %}
         <h1>Edit Post</h1>
         <hr/>
