@@ -87,7 +87,6 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView): # Form �
             form.instance.author = current_user # author 오버라이딩
             return super(PostCreate, self).form_valid(form)
         else:
-
             return redirect('/blog/')
 
 # CBV
@@ -106,6 +105,7 @@ class PostList(ListView): # 모델명_list.html
         return context # post_list.html로 {post_list, categories, no_category_post_count}
 
 
+
     # template_name = 'blog/blog_list.html' # 템플릿 지정: 기본 템플릿 post_list.html이 아닌 blog_list.html 사용
     # html에서 post_list로 모델값 불러옴
 
@@ -113,6 +113,8 @@ class PostList(ListView): # 모델명_list.html
 
 class PostDetail(DetailView): # 모델명_detail.html
     model = Post # post_list 변수
+
+
 
     def get_context_data(self, **kwargs):
         context = super(PostDetail, self).get_context_data()
@@ -152,6 +154,8 @@ def category_page(request, slug):
     else:
         category = Category.objects.get(slug=slug)
         post_list = Post.objects.filter(category=category)
+
+
 
     return render(
         request,
