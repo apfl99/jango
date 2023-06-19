@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "blog", # blog app 등록
     "single_pages", # single_pages app 등록
     "midterm", # 중간 app 등록
+    "final4",
 
     # 탬플릿과 필터 함수 등을 제공
     "crispy_forms",

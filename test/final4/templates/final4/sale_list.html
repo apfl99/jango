@@ -1,0 +1,36 @@
+{% extends 'final4/base.html' %}
+
+            {% block text %}
+                <p> {{user.username}}의 장바구니를 보고 있습니다. </p>
+            {% endblock %}
+
+    {% block main_content %}
+        <h2>Product List in Cart [{{user.username}}]</h2>
+
+
+      <!-- 구매 내역이 있는 사용자가 로그인한 경우-->
+      {% if sale_list.exists %}
+        {% for s in sale_list %}
+          <div>
+            <div class="media border border-primary d-inline-block-flex p-2">
+              <div class="media-body">
+                <h4 class="mt-0">{{s.product}}</h4>
+                <p class="mb-1">{{s.description}}</p>
+                <span class="mb-1">개당 {{s.price}} 원 x {{s.count}} 개 구입</span>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+
+        <div class="card">
+          <div class = "card-header">
+            <h4 >전체 구매 금액은 입니다.</h4>
+          </div>
+        </div>
+      {% else %}
+        <!-- 구매 내역이 없는 사용자의 경우 -->
+        <h3>아직 카트에 담긴 상품이 없습니다.</h3>
+      {% endif %}
+
+
+    {% endblock %}
